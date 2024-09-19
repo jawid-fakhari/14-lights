@@ -2,6 +2,11 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
 
+//Attenzione:
+//AmbientLight & HemisphereLight sono light cost of perfomances
+//DirectionalLight & PointLight sono moderate cost of perfomances
+//SpotLight & RectAreaLight sono high cost of perfomances
+
 /**
  * Base
  */
@@ -21,9 +26,9 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
 scene.add(ambientLight);
 gui.add(ambientLight, "intensity").min(0).max(1).step(0.001);
 
-const pointLight = new THREE.PointLight(0xffffff, 50);
+const pointLight = new THREE.PointLight(0xff9000, 50);
 pointLight.position.x = 2;
-pointLight.position.y = 3;
+pointLight.position.y = 1;
 pointLight.position.z = 4;
 scene.add(pointLight);
 gui.add(pointLight, "intensity").min(0).max(15).step(0.001);
@@ -36,6 +41,24 @@ gui.add(directionalLight, "intensity").min(0).max(1).step(0.001);
 const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.9);
 scene.add(hemisphereLight);
 gui.add(hemisphereLight, "intensity").min(0).max(4).step(0.001);
+
+const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 2,1,1);
+rectAreaLight.position.set(-1.5, 0, 1.5);
+rectAreaLight.lookAt(new THREE.Vector3)
+scene.add(rectAreaLight);
+gui.add(rectAreaLight, "intensity").min(0).max(10).step(0.001);
+
+const spotLight = new THREE.SpotLight(
+  0x78ff00,
+  4.5,
+  10,
+  Math.PI * 0.1,
+  0.25,
+  1
+);
+spotLight.position.set(0,2,3)
+scene.add(spotLight)
+gui.add(spotLight, "intensity").min(0).max(10).step(0.001);
 /**
  * Objects
  */
