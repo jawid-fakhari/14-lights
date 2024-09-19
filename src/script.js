@@ -42,9 +42,9 @@ const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.9);
 scene.add(hemisphereLight);
 gui.add(hemisphereLight, "intensity").min(0).max(4).step(0.001);
 
-const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 2,1,1);
+const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 2, 1, 1);
 rectAreaLight.position.set(-1.5, 0, 1.5);
-rectAreaLight.lookAt(new THREE.Vector3)
+rectAreaLight.lookAt(new THREE.Vector3());
 scene.add(rectAreaLight);
 gui.add(rectAreaLight, "intensity").min(0).max(10).step(0.001);
 
@@ -56,9 +56,17 @@ const spotLight = new THREE.SpotLight(
   0.25,
   1
 );
-spotLight.position.set(0,2,3)
-scene.add(spotLight)
+spotLight.position.set(0, 2, 3);
+scene.add(spotLight);
 gui.add(spotLight, "intensity").min(0).max(10).step(0.001);
+
+/**
+ * HELPERS per trovare 
+ */
+const hemisphereLightHelper = new THREE.HemisphereLightHelper(hemisphereLight, 0.2);
+scene.add(hemisphereLightHelper);
+const directionalLightHelper = new THREE.DirectionalLight(directionalLight, 0.3);
+scene.add(directionalLightHelper);
 /**
  * Objects
  */
